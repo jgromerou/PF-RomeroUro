@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Eliminar Usuario</h1>
+<h3 mat-dialog-title>¿Desea eliminar el Usuario {{ data.idUsuario }}?</h3>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Eliminar</button>
+</div>

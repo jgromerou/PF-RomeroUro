@@ -1,0 +1,17 @@
+.content {
+  background-color: #ffffff;
+}
+
+.footer {
+  clear: both;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background-color: #0d47a1;
+  text-align: center;
+  align-items: baseline;
+  color: white;
+  height: 34px;
+  left: 0;
+  font-size: small;
+}

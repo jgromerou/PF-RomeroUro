@@ -1,0 +1,70 @@
+<mat-toolbar color="primary">
+  <div>
+    <button
+      mat-icon-button
+      *ngIf="sidenav.mode === 'over' && sidenav"
+      (click)="sidenav.toggle()"
+    >
+      <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+      <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+    </button>
+  </div>
+  <a mat-button><span appTitulo>SISTEMA</span></a>
+</mat-toolbar>
+
+<mat-sidenav-container fxFlexFill>
+  <mat-sidenav #sidenav fxLayout="column" closed="true">
+    <div
+      fxLayout="column"
+      *ngIf="authService.isAuthenticated | async; else noConnect"
+    >
+      <button mat-button class="menu-button" routerLink="/alumnos">
+        <mat-icon>account_circle</mat-icon>
+        <span>Alumnos</span>
+      </button>
+
+      <mat-divider></mat-divider>
+
+      <button mat-button class="menu-button" routerLink="/cursos">
+        <mat-icon>bookmark</mat-icon>
+        <span>Cursos</span>
+      </button>
+
+      <mat-divider></mat-divider>
+
+      <button mat-button class="menu-button" routerLink="/inscripciones">
+        <mat-icon>library_books</mat-icon>
+        <span>Inscripciones</span>
+      </button>
+
+      <mat-divider></mat-divider>
+
+      <button
+        *ngIf="authService.isAdmin"
+        mat-button
+        class="menu-button"
+        routerLink="/usuarios"
+      >
+        <mat-icon>video_label</mat-icon>
+        <span>Usuarios</span>
+      </button>
+      <div *ngIf="authService.isAdmin">
+        <mat-divider></mat-divider>
+      </div>
+      <button mat-button class="menu-botton" (click)="cerrarSesion()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Cerrar Sesión</span>
+      </button>
+    </div>
+
+    <ng-template #noConnect>
+      <h3>Iniciar sesión para usar la app</h3>
+    </ng-template>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

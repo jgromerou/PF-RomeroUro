@@ -1,0 +1,157 @@
+<mat-toolbar color="primary" class="titulo">
+  <div align="center" style="text-align: right" appTitulo>
+    Agregar nuevo alumno
+  </div>
+</mat-toolbar>
+
+<mat-card-content>
+  <form [formGroup]="formularioAlumno" (ngSubmit)="GuardarAlumno()">
+    <div fxLayout="row" fxFlexFill fxLayout.lt-md="column" fxLayoutGap="8px">
+      <mat-form-field fxFlex>
+        <input
+          formControlName="nombres"
+          matTooltip="Ingrese el nombre del alumno"
+          matInput
+          placeholder="nombres"
+          autocomplete="off"
+        />
+        <mat-error>
+          <span *ngIf="formularioAlumno.get('nombres')?.invalid" class="error"
+            >El Nombre es requerido
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <input
+          formControlName="apellidos"
+          matTooltip="Ingrese el apellido del alumno"
+          matInput
+          placeholder="apellidos"
+          autocomplete="off"
+        />
+        <mat-error>
+          <span *ngIf="formularioAlumno.get('apellidos')?.invalid" class="error"
+            >El Apellido es requerido
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input
+          formControlName="email"
+          matTooltip="Ingrese el email del alumno"
+          matInput
+          placeholder="email"
+          autocomplete="off"
+        />
+        <mat-error>
+          <span
+            *ngIf="formularioAlumno.get('email')?.errors?.['required']"
+            class="error"
+            >El Email es requerido
+          </span>
+          <span
+            *ngIf="formularioAlumno.get('email')?.errors?.['email']"
+            class="error"
+            >Ingrese un Email válido
+          </span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxFlexFill fxLayout.lt-md="column" fxLayoutGap="8px">
+      <mat-form-field fxFlex>
+        <input
+          formControlName="dni"
+          matTooltip="Ingrese la dni del alumno"
+          matInput
+          placeholder="dni"
+          autocomplete="off"
+        />
+        <mat-error>
+          <span
+            *ngIf="formularioAlumno.get('dni')?.errors?.['required']"
+            class="error"
+            >El DNI es requerido
+          </span>
+          <span
+            *ngIf="formularioAlumno.get('dni')?.errors?.['pattern']"
+            class="error"
+            >Ingrese un caracter numérico
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-label>Domicilio</mat-label>
+        <!-- <select matNativeControl required formControlName="domicilio">
+          <option value="1">Activo</option>
+          <option value="0">Inactivo</option>
+        </select> -->
+        <input
+          formControlName="domicilio"
+          matTooltip="Ingrese la dni del alumno"
+          matInput
+          placeholder="domicilio"
+          autocomplete="off"
+        />
+        <mat-error>
+          <span
+            *ngIf="formularioAlumno.get('domicilio')?.errors?.['required']"
+            class="error"
+            >El domicilio es requerido
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-label>Telefono</mat-label>
+        <input
+          formControlName="telefono"
+          matTooltip="Ingrese la dni del alumno"
+          matInput
+          placeholder="telefono"
+          autocomplete="off"
+        />
+        <mat-error>
+          <span
+            *ngIf="formularioAlumno.get('telefono')?.errors?.['required']"
+            class="error"
+            >El telefono es requerido
+          </span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <button
+        type="submit"
+        mat-raised-button
+        color="accent"
+        matTooltip="Submit"
+        [disabled]="formularioAlumno.invalid"
+      >
+        Agregar Alumno</button
+      >&nbsp;&nbsp;&nbsp;&nbsp;
+      <button
+        type="reset"
+        mat-raised-button
+        color="accent"
+        matTooltip="Reset"
+        (click)="reiniciarFormulario()"
+      >
+        Reiniciar
+      </button>
+    </div>
+
+    <p
+      *ngIf="dataSaved"
+      style="
+        color: rgb(0, 128, 0);
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 2rem;
+      "
+      Class="success"
+      align="left"
+    >
+      El alumno se agregó correctamente
+    </p>
+  </form>
+</mat-card-content>

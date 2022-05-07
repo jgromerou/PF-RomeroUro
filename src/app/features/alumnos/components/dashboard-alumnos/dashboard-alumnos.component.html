@@ -1,0 +1,106 @@
+<div class="container">
+  <div *ngIf="authService.isAdmin">
+    <app-form></app-form>
+  </div>
+
+  <mat-toolbar color="primary" class="titulo mt-4">
+    <div align="center" style="text-align: right" appTitulo>
+      Tabla de Alumnos
+    </div>
+  </mat-toolbar>
+
+  <table #myTable mat-table [dataSource]="datos$" class="mat-elevation-z8">
+    <ng-container matColumnDef="idAlumno">
+      <th mat-header-cell *matHeaderCellDef>IDAlumno</th>
+      <td mat-cell *matCellDef="let element">{{ element.idAlumno }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombres">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let element">{{ element.nombres }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="apellidos">
+      <th mat-header-cell *matHeaderCellDef>Apellido</th>
+      <td mat-cell *matCellDef="let element">{{ element.apellidos }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="dni">
+      <th mat-header-cell *matHeaderCellDef>dni</th>
+      <td mat-cell *matCellDef="let element">{{ element.dni }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="domicilio">
+      <th mat-header-cell *matHeaderCellDef>Domicilio</th>
+      <td mat-cell *matCellDef="let element">{{ element.domicilio }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="telefono">
+      <th mat-header-cell *matHeaderCellDef>Telefono</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.telefono }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+
+      <mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          aria-label="Icono Ver"
+          type="button"
+          mat-raised-button
+          color="accent"
+          matTooltip="Ver"
+          (click)="openDialogVer(element)"
+          [routerLink]="['ver/', element.idAlumno]"
+        >
+          <mat-icon>search</mat-icon>
+        </button>
+
+        <!--Botón Editar solo visible para el administrador-->
+        <div *ngIf="authService.isAdmin">
+          <button
+            mat-icon-button
+            aria-label="Icono editar"
+            type="button"
+            mat-raised-button
+            color="accent"
+            matTooltip="Editar"
+            (click)="openDialogEditar(element)"
+            [routerLink]="['editar/', element.idAlumno]"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+
+        <!--Botón Eliminar solo visible para el administrador-->
+        <div *ngIf="authService.isAdmin">
+          <button
+            mat-icon-button
+            aria-label="Icono Eliminar"
+            type="button"
+            mat-raised-button
+            color="accent"
+            matTooltip="Eliminar"
+            (click)="openDialogEliminar(element)"
+            [routerLink]="['eliminar/', element.idAlumno]"
+          >
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+
+<mat-divider></mat-divider>

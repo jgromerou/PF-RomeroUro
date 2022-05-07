@@ -1,0 +1,50 @@
+<h1 mat-dialog-title>Editar Curso</h1>
+<h3 mat-dialog-title>ID Curso: {{ data.idCurso }}</h3>
+<div mat-dialog-content align="center">
+  <mat-form-field appearance="fill">
+    <mat-label>Curso</mat-label>
+    <input
+      matInput
+      #input
+      class="form-control"
+      placeholder="Curso"
+      [(ngModel)]="data.curso"
+      name="curso"
+      required
+    />
+    <mat-error *ngIf="formControl.invalid">{{ getError() }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Descripción</mat-label>
+    <input
+      matInput
+      #input
+      class="form-control"
+      placeholder="Descripción"
+      [(ngModel)]="data.descripcion"
+      name="descripcion"
+      required
+    />
+    <mat-error *ngIf="formControl.invalid">{{ getError() }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Horas</mat-label>
+    <input
+      matInput
+      #input
+      class="form-control"
+      placeholder="Horas"
+      [(ngModel)]="data.horas"
+      name="horas"
+      required
+    />
+    <mat-error *ngIf="formControl.invalid">{{ getError() }}</mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>
+    Modificar
+  </button>
+</div>
