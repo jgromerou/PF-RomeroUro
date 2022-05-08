@@ -11,6 +11,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { VerCursoComponent } from './components/dialog/ver-curso/ver-curso.component';
+/* import { EffectsModule } from '@ngrx/effects';
+import { CursoEffects } from '../../curso.effects'; */
+import { StoreModule } from '@ngrx/store';
+import { cursoFeatureKey, cursoReducer } from './state/curso.reducer';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,7 @@ import { VerCursoComponent } from './components/dialog/ver-curso/ver-curso.compo
     SharedModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    StoreModule.forFeature(cursoFeatureKey, cursoReducer),
   ],
 })
 export class CursosModule {}

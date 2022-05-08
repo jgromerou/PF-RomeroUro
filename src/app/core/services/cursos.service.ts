@@ -23,6 +23,7 @@ export class CursosService {
         {
           next: () => {
             this.cursoSubject.next(curso);
+            console.log('curso: ', curso);
           },
           error: (error) => console.log(error),
         }
@@ -38,6 +39,7 @@ export class CursosService {
           // Log the result or error
           {
             next: () => {
+              console.log('editar idcurso', curso.idCurso);
               this.cursoSubject.next(curso);
             },
 
@@ -47,9 +49,9 @@ export class CursosService {
       );
   }
 
-  eliminarCurso(curso: any) {
+  eliminarCurso(curso: Curso) {
     return this.http
-      .delete(`${environment.URL_SERVICIOS}/Cursos/${curso.idCurso}`, curso)
+      .delete(`${environment.URL_SERVICIOS}/Cursos/${curso.idCurso}`)
       .pipe(
         tap(
           // Log the result or error

@@ -9,7 +9,7 @@
     </div>
   </mat-toolbar>
 
-  <table #myTable mat-table [dataSource]="datos$" class="mat-elevation-z8">
+  <table #myTable mat-table [dataSource]="curso" class="mat-elevation-z8">
     <ng-container matColumnDef="idCurso">
       <th mat-header-cell *matHeaderCellDef>ID Curso</th>
       <td mat-cell *matCellDef="let element">{{ element.idCurso }}</td>
