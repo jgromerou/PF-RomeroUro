@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { selectorUsuarioActivo } from 'src/app/features/auth/state/auth.selectors';
 import { Usuario } from 'src/app/core/models/usuario';
+import { cerrarSesion } from 'src/app/features/auth/state/auth.actions';
 
 @UntilDestroy()
 @Component({
@@ -40,9 +41,20 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    var values = JSON.parse(localStorage.getItem('session') || 'false');
+
     this.store.select(selectorUsuarioActivo).subscribe((data) => {
-      this.usuarioActivo = data.usuarioActivo;
-      console.log('act', this.usuarioActivo.idUsuario);
+      console.log();
+
+      //JSON.parse(localStorage.getItem('session') || 'false').usuario
+      if (values.usuario !== undefined) {
+        console.log('localstorage', values.usuario);
+        this.usuarioActivo = values.usuario;
+        console.log('user active', this.usuarioActivo);
+      } else {
+        this.usuarioActivo = data.usuarioActivo;
+        console.log('act', this.usuarioActivo.usuario);
+      }
     });
   }
 
@@ -74,5 +86,7 @@ export class NavbarComponent implements OnInit {
 
   cerrarSesion() {
     this.authService.CerrarSesion();
+    this.store.dispatch(cerrarSesion());
+    this.router.navigate(['login']);
   }
 }

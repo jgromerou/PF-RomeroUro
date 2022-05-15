@@ -22,5 +22,9 @@ export const authReducer = createReducer(
 
   on(AuthActions.cargarSesion, (state, { data }) => {
     return { ...state, usuarioActivo: data };
+  }),
+
+  on(AuthActions.cerrarSesion, (state) => {
+    return initialState;
   })
 );
