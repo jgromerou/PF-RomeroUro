@@ -7,33 +7,35 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class CursosService {
-  cursoSubject = new Subject<Curso>();
+  cursoSubject = new Subject<any>();
   URL_SERVICIOS = environment.URL_SERVICIOS;
 
   constructor(private http: HttpClient) {}
 
   obtenerDatos(): Observable<any> {
-    return this.http.get(`${environment.URL_SERVICIOS}/Cursos`);
+    return this.http.get<any>(`${environment.URL_SERVICIOS}/Cursos`);
   }
 
   agregarCursos(curso: Curso): Observable<any> {
-    return this.http.post(`${environment.URL_SERVICIOS}/Cursos`, curso).pipe(
-      tap(
-        // Log the result or error
-        {
-          next: () => {
-            this.cursoSubject.next(curso);
-            console.log('curso: ', curso);
-          },
-          error: (error) => console.log(error),
-        }
-      )
-    );
+    return this.http
+      .post<Curso>(`${environment.URL_SERVICIOS}/Cursos`, curso)
+      .pipe(
+        tap(
+          // Log the result or error
+          {
+            next: (curso) => {
+              this.cursoSubject.next(curso);
+              console.log('curso: ', curso);
+            },
+            error: (error) => console.log(error),
+          }
+        )
+      );
   }
 
   editarCurso(curso: Curso): Observable<any> {
     return this.http
-      .put(`${environment.URL_SERVICIOS}/Cursos/${curso.idCurso}`, curso)
+      .put<Curso>(`${environment.URL_SERVICIOS}/Cursos/${curso.idCurso}`, curso)
       .pipe(
         tap(
           // Log the result or error
@@ -49,9 +51,9 @@ export class CursosService {
       );
   }
 
-  eliminarCurso(curso: Curso) {
+  eliminarCurso(curso: Curso): Observable<any> {
     return this.http
-      .delete(`${environment.URL_SERVICIOS}/Cursos/${curso.idCurso}`)
+      .delete<Curso>(`${environment.URL_SERVICIOS}/Cursos/${curso.idCurso}`)
       .pipe(
         tap(
           // Log the result or error

@@ -6,9 +6,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Usuario } from 'src/app/core/models/usuario';
 import { AuthService } from 'src/app/core/services/auth.service';
 import Swal from 'sweetalert2';
+import { cargarSesion } from '../../state/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +27,8 @@ export class LoginComponent {
   constructor(
     public fb: FormBuilder,
     private authService: AuthService,
-    private ruta: Router
+    private ruta: Router,
+    private store: Store
   ) {
     this.formLogin = fb.group({
       usuario: new FormControl('', [Validators.required]),
@@ -40,10 +43,11 @@ export class LoginComponent {
     console.log(usuario, contrasena);
     this.authService
       .IniciarSesion(usuario, contrasena)
-      .subscribe((data: Usuario[]) => {
-        if (data.length === 1) {
+      .subscribe((data: Usuario) => {
+        if (data) {
+          this.store.dispatch(cargarSesion({ data }));
           console.log('Usuario logueado exitosamente', data);
-          this.authService.establecerSesion(true, data[0]);
+          this.authService.establecerSesion(true, data);
         } else {
           console.log('Error de autenticación');
           Swal.fire({

@@ -1,10 +1,13 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { filter, delay } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Store } from '@ngrx/store';
+import { selectorUsuarioActivo } from 'src/app/features/auth/state/auth.selectors';
+import { Usuario } from 'src/app/core/models/usuario';
 
 @UntilDestroy()
 @Component({
@@ -12,15 +15,17 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   rol!: boolean;
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
+  usuarioActivo!: Usuario;
 
   constructor(
     private observer: BreakpointObserver,
     public authService: AuthService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {
     /*  var values = JSON.parse(localStorage.getItem('session') || 'false');
     if (values.usuario !== undefined) {
@@ -32,6 +37,13 @@ export class NavbarComponent {
     } else {
       this.rol = false;
     } */
+  }
+
+  ngOnInit(): void {
+    this.store.select(selectorUsuarioActivo).subscribe((data) => {
+      this.usuarioActivo = data.usuarioActivo;
+      console.log('act', this.usuarioActivo.idUsuario);
+    });
   }
 
   ngAfterViewInit() {

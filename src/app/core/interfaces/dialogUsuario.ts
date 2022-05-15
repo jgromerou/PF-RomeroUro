@@ -1,5 +1,5 @@
 export interface DialogUsuario {
-  idUsuario: number;
+  idUsuario: string;
   usuario: string;
   contrasena: string;
   rol: number;

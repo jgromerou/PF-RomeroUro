@@ -6,16 +6,17 @@ export const cursoFeatureKey = 'curso';
 
 export interface CursoState {
   cargando: boolean;
-  cursos: Curso[];
+  cursos: Curso;
 }
 
 export const initialState: CursoState = {
   cargando: false,
-  cursos: [],
-  /* idCurso: 0,
+  cursos: {
+    idCurso: 0,
     curso: '',
     descripcion: '',
-    horas: '', */
+    horas: '',
+  },
 };
 
 export const cursoReducer = createReducer(

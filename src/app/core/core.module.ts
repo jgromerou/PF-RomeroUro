@@ -5,6 +5,8 @@ import { AlumnosService } from './services/alumnos.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CursosService } from './services/cursos.service';
 import { AppRoutingModule } from './app-routing.module';
+import { InscripcionesService } from './services/inscripciones.service';
+import { UsuariosService } from './services/usuarios.service';
 
 @NgModule({
   declarations: [],
@@ -15,6 +17,11 @@ import { AppRoutingModule } from './app-routing.module';
     HttpClientModule,
   ],
   exports: [AppRoutingModule, AppMaterialModule],
-  providers: [AlumnosService, CursosService],
+  providers: [
+    AlumnosService,
+    CursosService,
+    InscripcionesService,
+    UsuariosService,
+  ],
 })
 export class CoreModule {}

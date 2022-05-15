@@ -5,5 +5,5 @@ export const cargarCursos = createAction('[Curso] Cargar Cursos');
 
 export const cursosCargados = createAction(
   '[Curso] Cursos Cargados',
-  props<{ cursos: Curso[] }>()
+  props<{ cursos: Curso }>()
 );

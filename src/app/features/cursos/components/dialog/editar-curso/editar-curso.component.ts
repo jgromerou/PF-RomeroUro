@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogCurso } from 'src/app/core/interfaces/dialogCurso';
+import { Curso } from 'src/app/core/models/curso';
 
 @Component({
   selector: 'app-editar-curso',

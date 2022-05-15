@@ -8,6 +8,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { authFeatureKey, authReducer } from './state/auth.reducer';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -20,6 +22,7 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     FlexLayoutModule,
     MatDialogModule,
+    StoreModule.forFeature(authFeatureKey, authReducer),
   ],
   exports: [LoginComponent],
 })

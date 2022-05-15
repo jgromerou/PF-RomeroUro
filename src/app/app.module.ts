@@ -27,7 +27,6 @@ import { environment } from '../environments/environment';
     BrowserModule,
     SharedModule,
     AppRoutingModule,
-
     AlumnosRoutingModule,
     CursosRoutingModule,
     InscripcionesRoutingModule,

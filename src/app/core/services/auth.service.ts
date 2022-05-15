@@ -42,21 +42,21 @@ export class AuthService {
   }
 
   //Inicio de sesión del usuario.
-  IniciarSesion(usuario: string, contrasena: string): Observable<Usuario[]> {
+  IniciarSesion(usuario: string, contrasena: string): Observable<Usuario> {
     return this.http
       .get<Usuario[]>(`${environment.URL_SERVICIOS}/Usuarios`)
       .pipe(
         map((usuarios: Usuario[]) => {
           return usuarios.filter(
             (u) => u.usuario === usuario && u.contrasena === contrasena
-          );
+          )[0];
         })
       )
       .pipe(
         tap((res: any) => {
-          if (res.length === 1) {
+          if (res) {
             this.isAuthenticatedSrc.next(true);
-            if (res[0].rol == 1) {
+            if (res.rol == 1) {
               this.rol = true;
             } else {
               this.rol = false;

@@ -4,13 +4,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable, Subscription } from 'rxjs';
 import { EditarCursoComponent } from '../dialog/editar-curso/editar-curso.component';
 import { EliminarCursoComponent } from '../dialog/eliminar-curso/eliminar-curso.component';
-import { Curso } from 'src/app/core/models/curso';
+
 import { CursosService } from 'src/app/core/services/cursos.service';
 import { VerCursoComponent } from '../dialog/ver-curso/ver-curso.component';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { cargarCursos, cursosCargados } from '../../state/curso.actions';
+import { Curso } from 'src/app/core/models/curso';
 
 @Component({
   selector: 'app-dashboard-cursos',
@@ -25,7 +26,7 @@ export class DashboardCursosComponent implements OnInit {
   cursSubscription!: Subscription;
   datos$!: Observable<any>;
 
-  curso!: Curso[];
+  curso!: Observable<any>;
 
   displayedColumns: string[] = [
     'idCurso',
@@ -57,15 +58,16 @@ export class DashboardCursosComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(cargarCursos());
-    this._cursoService.obtenerDatos().subscribe((cursos: Curso[]) => {
+
+    this._cursoService.obtenerDatos().subscribe((cursos) => {
       this.store.dispatch(cursosCargados({ cursos }));
       this.curso = cursos;
     });
 
     /* this.cursSubscription = this._cursoService.cursoSubject.subscribe(
-      (cursos: Curso[]) => {
-        this.curso = cursos;
+      (cursos) => {
         this.store.dispatch(cursosCargados({ cursos }));
+        this.curso = cursos;
       }
     ); */
 
@@ -97,16 +99,17 @@ export class DashboardCursosComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result: Curso) => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log('El Dialog se ha cerrado');
 
-      this._cursoService.editarCurso(result).subscribe((resp: any) => {
-        this.ruta.navigate(['cursos']);
+      this._cursoService.editarCurso(result).subscribe(() => {
+        /*   this.ruta.navigate(['cursos']);
         console.log('edit333', result);
-        setTimeout(() => {
-          this.myTable.renderRows();
-          console.log(this.myTable.renderRows());
-        }, 300);
+        this.store.dispatch(cargarCursos());
+        setTimeout((cursos: Curso) => { */
+        this.myTable.renderRows();
+        /*  this.store.dispatch(cursosCargados({ cursos }));
+        }, 300); */
       });
     });
   }
