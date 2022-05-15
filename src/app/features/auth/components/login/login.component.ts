@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store';
 import { Usuario } from 'src/app/core/models/usuario';
 import { AuthService } from 'src/app/core/services/auth.service';
 import Swal from 'sweetalert2';
-import { cargarSesion } from '../../state/auth.actions';
+import { cargarSesion, loginAction } from '../../state/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -40,7 +40,6 @@ export class LoginComponent {
     event.preventDefault();
     const usuario = this.formLogin.value.usuario;
     const contrasena = this.formLogin.value.contrasena;
-    console.log(usuario, contrasena);
     this.authService
       .IniciarSesion(usuario, contrasena)
       .subscribe((data: Usuario) => {
@@ -58,5 +57,8 @@ export class LoginComponent {
           });
         }
       });
+    this.store.dispatch(
+      loginAction({ usuario: usuario, contrasena: contrasena })
+    );
   }
 }

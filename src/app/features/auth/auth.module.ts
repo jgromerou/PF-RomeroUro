@@ -10,6 +10,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { authFeatureKey, authReducer } from './state/auth.reducer';
+import { AuthEffects } from './state/auth.effects';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -23,6 +27,12 @@ import { authFeatureKey, authReducer } from './state/auth.reducer';
     FlexLayoutModule,
     MatDialogModule,
     StoreModule.forFeature(authFeatureKey, authReducer),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+      name: 'Prueba NgRx',
+    }),
+    EffectsModule.forFeature([AuthEffects]),
   ],
   exports: [LoginComponent],
 })

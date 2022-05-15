@@ -11,10 +11,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { VerCursoComponent } from './components/dialog/ver-curso/ver-curso.component';
-/* import { EffectsModule } from '@ngrx/effects';
-import { CursoEffects } from '../../curso.effects'; */
 import { StoreModule } from '@ngrx/store';
-import { cursoFeatureKey, cursoReducer } from './state/curso.reducer';
+import { cursoFeatureKey } from './state/curso.reducer';
 import { ROOT_REDUCERS } from './app.state';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
