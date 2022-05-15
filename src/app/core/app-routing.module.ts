@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DashboardAlumnosComponent } from '../features/alumnos/components/dashboard-alumnos/dashboard-alumnos.component';
 import { LoginComponent } from '../features/auth/components/login/login.component';
 import { DashboardCursosComponent } from '../features/cursos/components/dashboard-cursos/dashboard-cursos.component';
 import { NopagefoundComponent } from '../shared/nopagefound/nopagefound.component';
@@ -47,7 +48,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: DashboardCursosComponent,
+    component: DashboardAlumnosComponent,
     pathMatch: 'full',
     canActivate: [LoginGuard],
   },

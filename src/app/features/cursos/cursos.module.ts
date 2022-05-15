@@ -15,6 +15,11 @@ import { VerCursoComponent } from './components/dialog/ver-curso/ver-curso.compo
 import { CursoEffects } from '../../curso.effects'; */
 import { StoreModule } from '@ngrx/store';
 import { cursoFeatureKey, cursoReducer } from './state/curso.reducer';
+import { ROOT_REDUCERS } from './app.state';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { CursoEffects } from './state/curso.effects';
 
 @NgModule({
   declarations: [
@@ -31,7 +36,13 @@ import { cursoFeatureKey, cursoReducer } from './state/curso.reducer';
     SharedModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    StoreModule.forFeature(cursoFeatureKey, cursoReducer),
+    StoreModule.forFeature(cursoFeatureKey, ROOT_REDUCERS),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+      name: 'Prueba NgRx',
+    }),
+    EffectsModule.forFeature([CursoEffects]),
   ],
 })
 export class CursosModule {}

@@ -7,6 +7,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class CursosService {
+  [x: string]: any;
   cursoSubject = new Subject<any>();
   URL_SERVICIOS = environment.URL_SERVICIOS;
 

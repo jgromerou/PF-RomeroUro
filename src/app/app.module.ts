@@ -20,6 +20,9 @@ import { AuthModule } from './features/auth/auth.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { CursoEffects } from './features/cursos/state/curso.effects';
+import { ROOT_REDUCERS } from './features/cursos/app.state';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,12 +41,13 @@ import { environment } from '../environments/environment';
     InscripcionesModule,
     UsuariosModule,
     AuthModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(ROOT_REDUCERS),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
       name: 'Cargar y cursos cargados en la lista',
     }),
+    EffectsModule.forRoot([CursoEffects]),
   ],
   bootstrap: [AppComponent],
 })
