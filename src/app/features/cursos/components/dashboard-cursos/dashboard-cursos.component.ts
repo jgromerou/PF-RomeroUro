@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTable } from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, Subscription } from 'rxjs';
 import { EditarCursoComponent } from '../dialog/editar-curso/editar-curso.component';
@@ -11,11 +10,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { cargarCursos, cursosCargados } from '../../state/curso.actions';
 import { Curso } from 'src/app/core/models/curso';
-import {
-  selectorCargandoCursos,
-  selectorListaCursos,
-} from '../../state/curso.selectors';
-import { AppState } from '../../app.state';
+import { selectorListaCursos } from '../../state/curso.selectors';
 
 @Component({
   selector: 'app-dashboard-cursos',
@@ -23,16 +18,11 @@ import { AppState } from '../../app.state';
   styleUrls: ['./dashboard-cursos.component.css'],
 })
 export class DashboardCursosComponent implements OnInit {
-  @ViewChild(MatTable) myTable!: MatTable<any>;
-  dataSaved = false;
-  rol!: boolean;
+  /*  @ViewChild(MatTable) myTable!: MatTable<any>;
+  dataSaved = false; */
 
   cursSubscription!: Subscription;
   datos$!: Observable<Curso[]>;
-
-  curso!: any;
-
-  cargando$!: Observable<Curso>;
 
   displayedColumns: string[] = [
     'idCurso',
@@ -47,7 +37,7 @@ export class DashboardCursosComponent implements OnInit {
     public authService: AuthService,
     private ruta: Router,
     public dialog: MatDialog,
-    private store: Store<AppState>
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -88,34 +78,26 @@ export class DashboardCursosComponent implements OnInit {
   openDialogEliminar(curso: Curso) {
     const dialogRef = this.dialog.open(EliminarCursoComponent, {
       width: '250px',
-      data: [
-        {
-          idCurso: curso.idCurso,
-        },
-      ],
+      data: {
+        idCurso: curso.idCurso,
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('El Dialog se ha cerrado');
       if (result !== undefined) {
         this.ruta.navigate(['cursos']);
-        this._cursoService.eliminarCurso(result).subscribe((resp: any) => {
-          setTimeout(() => {
-            this.myTable.renderRows();
-            console.log(this.myTable.renderRows());
-          }, 2000);
-          return;
+        this._cursoService.eliminarCurso(result).subscribe(() => {
+          this.store.dispatch(cargarCursos());
         });
-      } else {
-        this.ruta.navigate(['cursos']);
       }
-      this.myTable.renderRows();
     });
   }
 
   openDialogVer(curso: Curso) {
     const dialogRef = this.dialog.open(VerCursoComponent, {
-      width: '300px',
+      width: '600px',
+      height: '600px',
       panelClass: 'makeItMiddle',
       data: {
         idCurso: curso.idCurso,

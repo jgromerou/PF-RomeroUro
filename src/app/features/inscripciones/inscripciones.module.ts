@@ -11,6 +11,16 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { VerInscripcionComponent } from './components/dialog/ver-inscripcion/ver-inscripcion.component';
+import { EffectsModule } from '@ngrx/effects';
+import { InscripcionesEffects } from './state/inscripciones.effects';
+import {
+  inscripcionesFeatureKey,
+  inscripcionesReducer,
+} from './state/inscripciones.reducer';
+import { StoreModule } from '@ngrx/store';
+import { InscripcionesService } from 'src/app/core/services/inscripciones.service';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -27,6 +37,14 @@ import { VerInscripcionComponent } from './components/dialog/ver-inscripcion/ver
     SharedModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    StoreModule.forFeature(inscripcionesFeatureKey, inscripcionesReducer),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+      name: 'Prueba NgRx',
+    }),
+    EffectsModule.forFeature([InscripcionesEffects]),
   ],
+  providers: [InscripcionesService],
 })
 export class InscripcionesModule {}

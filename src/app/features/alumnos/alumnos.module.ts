@@ -12,6 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { VerAlumnoComponent } from './components/dialog/ver-alumno/ver-alumno.component';
 import { RouterModule } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
+//import { AlumnosEffects } from '../alumnos.effects';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { RouterModule } from '@angular/router';
     SharedModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    //EffectsModule.forFeature([AlumnosEffects]),
   ],
   exports: [AlumnosRoutingModule],
 })

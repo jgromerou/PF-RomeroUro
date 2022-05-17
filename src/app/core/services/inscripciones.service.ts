@@ -8,31 +8,45 @@ import { Inscripcion } from '../models/inscripcion';
   providedIn: 'root',
 })
 export class InscripcionesService {
-  inscripcionSubject = new Subject<Inscripcion>();
+  inscripcionSubject = new Subject<any>();
   URL_SERVICIOS = environment.URL_SERVICIOS;
 
   constructor(private http: HttpClient) {}
 
   obtenerDatosInscripciones(): Observable<any> {
-    return this.http.get(`${environment.URL_SERVICIOS}/Inscripciones`);
+    return this.http.get<any>(`${environment.URL_SERVICIOS}/Inscripciones`);
   }
 
-  obtenerDatosAlumnos(): Observable<any> {
+  obtenerDatosInscripcionesFiltradoCurso(inscripcion: any): Observable<any> {
+    return this.http.get<any>(
+      `${environment.URL_SERVICIOS}/Inscripciones?idCurso=${inscripcion.idCurso}`
+    );
+  }
+
+  obtenerDatosInscripcionesFiltradoAlumno(inscripcion: any): Observable<any> {
+    return this.http.get<any>(
+      `${environment.URL_SERVICIOS}/Inscripciones?idAlumno=${inscripcion}`
+    );
+  }
+
+  /* obtenerDatosAlumnos(): Observable<any> {
     return this.http.get(`${environment.URL_SERVICIOS}/Alumnos`);
   }
-  obtenerDatosCursos(): Observable<any> {
-    return this.http.get(`${environment.URL_SERVICIOS}/Cursos`);
-  }
+  obtenerDatosCursoconalumnos(curso: any): Observable<any> {
+    return this.http.get(
+      `${environment.URL_SERVICIOS}/Inscripciones?idCurso=${curso}`
+    );
+  } */
 
-  agregarInscripcion(curso: any) {
+  agregarInscripcion(inscripcion: Inscripcion) {
     return this.http
-      .post(`${environment.URL_SERVICIOS}/Inscripciones`, curso)
+      .post(`${environment.URL_SERVICIOS}/Inscripciones`, inscripcion)
       .pipe(
         tap(
           // Log the result or error
           {
             next: () => {
-              this.inscripcionSubject.next(curso);
+              this.inscripcionSubject.next(inscripcion);
             },
             error: (error) => console.log(error),
           }
@@ -40,10 +54,10 @@ export class InscripcionesService {
       );
   }
 
-  editarInscripcion(inscripcion: any) {
+  editarInscripcion(inscripcion: Inscripcion) {
     return this.http
       .put(
-        `${environment.URL_SERVICIOS}/Inscripciones/${inscripcion.idCurso}`,
+        `${environment.URL_SERVICIOS}/Inscripciones/${inscripcion.idInscripcion}`,
         inscripcion
       )
       .pipe(
@@ -60,11 +74,10 @@ export class InscripcionesService {
       );
   }
 
-  eliminarInscripcion(inscripcion: any) {
+  eliminarInscripcion(inscripcion: Inscripcion) {
     return this.http
       .delete(
-        `${environment.URL_SERVICIOS}/Inscripciones/${inscripcion.idInscripcion}`,
-        inscripcion
+        `${environment.URL_SERVICIOS}/Inscripciones/${inscripcion.idInscripcion}`
       )
       .pipe(
         tap(

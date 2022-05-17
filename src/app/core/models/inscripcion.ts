@@ -1,7 +1,7 @@
 export class Inscripcion {
   constructor(
-    public idInscripcion: number,
-    public idAlumno: number,
-    public idCurso: number
+    public idInscripcion: string,
+    public idAlumno: string,
+    public idCurso: string
   ) {}
 }

@@ -7,7 +7,6 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class CursosService {
-  [x: string]: any;
   cursoSubject = new Subject<any>();
   URL_SERVICIOS = environment.URL_SERVICIOS;
 
@@ -16,6 +15,12 @@ export class CursosService {
   obtenerDatos(): Observable<any> {
     return this.http.get<any>(`${environment.URL_SERVICIOS}/Cursos`);
   }
+
+  /* obtenerDatosCursoconAlumnos(curso: any): Observable<any> {
+    return this.http.get<any>(
+      `${environment.URL_SERVICIOS}/Inscripciones?idCurso=10`
+    );
+  } */
 
   agregarCursos(curso: Curso): Observable<any> {
     return this.http
@@ -42,7 +47,6 @@ export class CursosService {
           // Log the result or error
           {
             next: () => {
-              console.log('editar idcurso', curso.idCurso);
               this.cursoSubject.next(curso);
             },
 

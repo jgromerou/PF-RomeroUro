@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardAlumnosComponent } from '../features/alumnos/components/dashboard-alumnos/dashboard-alumnos.component';
 import { LoginComponent } from '../features/auth/components/login/login.component';
-import { DashboardCursosComponent } from '../features/cursos/components/dashboard-cursos/dashboard-cursos.component';
 import { NopagefoundComponent } from '../shared/nopagefound/nopagefound.component';
 import { AdminGuard } from './guards/admin.guard';
 import { LoginGuard } from './guards/login.guard';
@@ -26,7 +25,7 @@ const routes: Routes = [
   {
     path: 'cursos',
     loadChildren: () =>
-      import('./../features/cursos/cursos.module').then((m) => m.CursosModule),
+      import('../features/cursos/cursos.module').then((m) => m.CursosModule),
     canActivate: [LoginGuard],
   },
 

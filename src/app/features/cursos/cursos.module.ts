@@ -12,12 +12,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { VerCursoComponent } from './components/dialog/ver-curso/ver-curso.component';
 import { StoreModule } from '@ngrx/store';
-import { cursoFeatureKey } from './state/curso.reducer';
-import { ROOT_REDUCERS } from './app.state';
+import { cursoFeatureKey, cursoReducer } from './state/curso.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { CursoEffects } from './state/curso.effects';
+import { CursosService } from 'src/app/core/services/cursos.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { CursoEffects } from './state/curso.effects';
     SharedModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    StoreModule.forFeature(cursoFeatureKey, ROOT_REDUCERS),
+    StoreModule.forFeature(cursoFeatureKey, cursoReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
@@ -42,5 +42,6 @@ import { CursoEffects } from './state/curso.effects';
     }),
     EffectsModule.forFeature([CursoEffects]),
   ],
+  providers: [CursosService],
 })
 export class CursosModule {}

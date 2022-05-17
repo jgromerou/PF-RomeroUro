@@ -9,6 +9,12 @@ import { InscripcionesService } from 'src/app/core/services/inscripciones.servic
 import { VerInscripcionComponent } from '../dialog/ver-inscripcion/ver-inscripcion.component';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Store } from '@ngrx/store';
+import {
+  cargarInscripciones,
+  inscripcionesCargadas,
+} from '../../state/inscripciones.actions';
+import { selectorListaInscripciones } from '../../state/inscripciones.selectors';
 
 @Component({
   selector: 'app-dashboard-inscripciones',
@@ -34,25 +40,16 @@ export class DashboardInscripcionesComponent implements OnInit {
     private _inscripcionesService: InscripcionesService,
     public authService: AuthService,
     private ruta: Router,
-    public dialog: MatDialog
-  ) {
-    /* var values = JSON.parse(localStorage.getItem('session') || 'false');
-    if (values.usuario !== undefined) {
-      if (values.usuario.rol === 1) {
-        this.rol = true;
-      } else {
-        this.rol = false;
-      }
-    } else {
-      this.rol = false;
-    } */
-  }
+    public dialog: MatDialog,
+    private store: Store
+  ) {}
 
   ngOnInit(): void {
-    this.datos$ = this._inscripcionesService.obtenerDatosInscripciones();
+    this.store.dispatch(cargarInscripciones());
+    this.datos$ = this.store.select(selectorListaInscripciones);
     this.inscripSubscription =
-      this._inscripcionesService.inscripcionSubject.subscribe(() => {
-        this.datos$ = this._inscripcionesService.obtenerDatosInscripciones();
+      this._inscripcionesService.inscripcionSubject.subscribe((data) => {
+        this.store.dispatch(inscripcionesCargadas({ inscripciones: data }));
       });
   }
 

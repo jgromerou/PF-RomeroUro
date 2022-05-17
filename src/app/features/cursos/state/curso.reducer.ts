@@ -1,8 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
-import { CursoState } from 'src/app/core/models/curso.state';
+import { Curso } from 'src/app/core/models/curso';
 import * as CursoActions from './curso.actions';
 
 export const cursoFeatureKey = 'curso';
+
+export interface CursoState {
+  cargando: boolean;
+  cursos: Curso[];
+}
 
 export const initialState: CursoState = {
   cargando: false,
