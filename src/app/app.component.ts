@@ -12,14 +12,10 @@ import { selectorUsuarioActivo } from './features/auth/state/auth.selectors';
 })
 export class AppComponent implements OnInit {
   title = '3PF-RomeroUro';
-  //sesionActiva: boolean;
   other_content: boolean = false;
-  //logueado = JSON.parse(localStorage.getItem('session') || '{}').activa;
   usuarioActivo!: Usuario;
 
-  constructor(public authService: AuthService, private store: Store) {
-    // this.sesionActiva = localStorage.getItem('session') ? true : false;
-  }
+  constructor(public authService: AuthService, private store: Store) {}
 
   ngOnInit() {
     this.store.select(selectorUsuarioActivo).subscribe((data) => {

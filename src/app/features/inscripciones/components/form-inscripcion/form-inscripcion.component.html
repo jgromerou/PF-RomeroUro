@@ -8,7 +8,7 @@
   <form [formGroup]="formularioInscripcion" (ngSubmit)="GuardarInscripcion()">
     <div fxLayout="row" fxFlexFill fxLayout.lt-md="column" fxLayoutGap="8px">
       <mat-form-field fxFlex>
-        <mat-label>Nombre del Alumno</mat-label>
+        <mat-label>Id Alumno</mat-label>
         <mat-select formControlName="idAlumno">
           <mat-option
             *ngFor="let alumno of datosAlumnos$ | async"
@@ -17,6 +17,7 @@
             {{ alumno.nombres }}
           </mat-option>
         </mat-select>
+
         <mat-error>
           <span
             *ngIf="formularioInscripcion.get('idAlumno')?.errors?.['required']"

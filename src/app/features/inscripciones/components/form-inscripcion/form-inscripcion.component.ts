@@ -70,6 +70,10 @@ export class FormInscripcionComponent {
   GuardarInscripcion() {
     this.dataSaved = true;
     const forminscripcion = this.formularioInscripcion.value;
+    /*  console.log('id Alumno del from', forminscripcion.alumno.idAlumno);
+    const inscripcion = {
+      idAlumno: forminscripcion.idAlumno,
+    }; */
     this._inscripcionesService
       .agregarInscripcion(forminscripcion)
       .subscribe((resp: any) => {

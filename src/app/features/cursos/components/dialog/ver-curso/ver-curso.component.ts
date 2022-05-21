@@ -39,12 +39,7 @@ export class VerCursoComponent implements OnInit {
   cursalumSubscription!: Subscription;
   datosFiltrados$!: Observable<Inscripcion[]>;
 
-  displayedColumns: string[] = [
-    'idCurso',
-    'idInscripcion',
-    'idAlumno',
-    'acciones',
-  ];
+  displayedColumns: string[] = ['idCurso', 'idAlumno', 'acciones'];
 
   constructor(
     public dialogRef: MatDialogRef<VerCursoComponent>,
