@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject, tap } from 'rxjs';
+import { map, Observable, Subject, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Inscripcion } from '../models/inscripcion';
 
@@ -29,14 +29,17 @@ export class InscripcionesService {
     );
   }
 
-  /* obtenerDatosAlumnos(): Observable<any> {
-    return this.http.get(`${environment.URL_SERVICIOS}/Alumnos`);
+  desinscribirAlumnoCurso(idAlumno: string, idCurso: string): Observable<any> {
+    return this.http
+      .get<any>(`${environment.URL_SERVICIOS}/Inscripciones`)
+      .pipe(
+        map((inscripciones: any) => {
+          return inscripciones.filter(
+            (i: any) => i.idAlumno === idAlumno && i.idCurso === idCurso
+          )[0];
+        })
+      );
   }
-  obtenerDatosCursoconalumnos(curso: any): Observable<any> {
-    return this.http.get(
-      `${environment.URL_SERVICIOS}/Inscripciones?idCurso=${curso}`
-    );
-  } */
 
   agregarInscripcion(inscripcion: Inscripcion) {
     return this.http

@@ -48,7 +48,6 @@ export class LoginComponent {
           console.log('Usuario logueado exitosamente', data);
           this.authService.establecerSesion(true, data);
         } else {
-          console.log('Error de autenticación');
           Swal.fire({
             icon: 'error',
             title: 'Error de credenciales',

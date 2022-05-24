@@ -17,6 +17,7 @@ import { DialogCurso } from 'src/app/core/interfaces/dialogCurso';
 import { Inscripcion } from 'src/app/core/models/inscripcion';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CursosService } from 'src/app/core/services/cursos.service';
+import { InscripcionesService } from 'src/app/core/services/inscripciones.service';
 import {
   cargarInscripcionesCurso,
   inscripcionesCargadasCurso,
@@ -25,6 +26,7 @@ import {
   selectorCargandoInscripciones,
   selectorListaInscripcionesCurso,
 } from 'src/app/features/inscripciones/state/inscripciones.selectors';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ver-curso',
@@ -46,6 +48,7 @@ export class VerCursoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogCurso,
     public fb: FormBuilder,
     private _cursoService: CursosService,
+    private _inscripcionesService: InscripcionesService,
     public authService: AuthService,
     private ruta: Router,
     public dialog: MatDialog,
@@ -57,27 +60,29 @@ export class VerCursoComponent implements OnInit {
       cargarInscripcionesCurso({ idCurso: this.data.idCurso })
     );
     this.datosFiltrados$ = this.store.select(selectorListaInscripcionesCurso);
-    /* this.cursalumSubscription = this._cursoService.cursoSubject.subscribe(
-      (data) => {
-        this.store.dispatch(
-          inscripcionesCargadasCurso({ inscripciones: data })
-        );
-      }
-    ); */
   }
 
-  /*  ngOnDestroy(): void {
-    this.cursalumSubscription.unsubscribe();
-  } */
-
-  /* eliminarAlumno(curso: Curso) {
-    if (curso !== undefined) {
-      this.ruta.navigate(['cursos']);
-      this._cursoService.eliminarAlumnodelCurso(curso).subscribe(() => {
-        this.store.dispatch(cargarCursosconAlumnos());
-      });
+  desinscribirAlumno(idAlumno: any, idCurso: any) {
+    if (idAlumno !== undefined && idCurso !== undefined) {
+      this._inscripcionesService
+        .desinscribirAlumnoCurso(idAlumno, idCurso)
+        .subscribe((res) => {
+          const id = res.idInscripcion;
+          this._inscripcionesService
+            .eliminarInscripcion(res)
+            .subscribe((resp: any) => {
+              this.store.dispatch(
+                cargarInscripcionesCurso({ idCurso: this.data.idCurso })
+              );
+              Swal.fire({
+                icon: 'success',
+                title: 'Se desinscribió correctamente el alumno',
+                confirmButtonColor: '#0D47A1',
+              });
+            });
+        });
     }
-  } */
+  }
 
   formControl = new FormControl('', [Validators.required]);
 

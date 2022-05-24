@@ -17,13 +17,10 @@ export class AlumnosService {
     return this.http.get(`${environment.URL_SERVICIOS}/Alumnos`);
   }
 
-  obtenerDatosFiltrados(alumno: any): Observable<any> {
-    return this.http.get(
-      `${environment.URL_SERVICIOS}/Inscripciones?idCurso=${alumno}`
-    );
+  obtenerAlumno(idAlumno: any): Observable<any> {
+    return this.http.get(`${environment.URL_SERVICIOS}/Alumnos/${idAlumno}`);
   }
 
-  //agregar nuevo alumno
   agregarAlumnos(alumno: any) {
     return this.http.post(`${environment.URL_SERVICIOS}/Alumnos`, alumno).pipe(
       tap(

@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ConvertirestadoPipe } from './pipes/convertirestado.pipe';
 import { UnirnombreapellidoPipe } from './pipes/unirnombreapellido.pipe';
 import { RouterModule } from '@angular/router';
+import { ConvertirIdaNombrePipe } from './pipes/convertir-ida-nombre.pipe';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { RouterModule } from '@angular/router';
     DashboardComponent,
     ConvertirestadoPipe,
     UnirnombreapellidoPipe,
+    ConvertirIdaNombrePipe,
   ],
   imports: [CommonModule, RouterModule, AppMaterialModule],
   exports: [
@@ -25,6 +27,7 @@ import { RouterModule } from '@angular/router';
     DashboardComponent,
     ConvertirestadoPipe,
     UnirnombreapellidoPipe,
+    ConvertirIdaNombrePipe,
   ],
 })
 export class SharedModule {}
