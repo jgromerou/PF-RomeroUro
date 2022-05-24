@@ -73,16 +73,17 @@ export class DashboardInscripcionesComponent implements OnInit {
 
       if (result !== undefined) {
         this.ruta.navigate(['inscripciones']);
-        this._inscripcionesService
+        /* this._inscripcionesService
           .editarInscripcion(result)
           .subscribe((resp: any) => {
             setTimeout(() => {
               this.myTable.renderRows();
             }, 300);
             return;
-          });
-      } else {
-        this.ruta.navigate(['inscripciones']);
+          }); */
+        this._inscripcionesService.editarInscripcion(result).subscribe(() => {
+          this.store.dispatch(cargarInscripciones());
+        });
       }
     });
   }
@@ -98,7 +99,7 @@ export class DashboardInscripcionesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('El Dialog se ha cerrado');
       if (result !== undefined) {
-        this.ruta.navigate(['inscripciones']);
+        /*  this.ruta.navigate(['inscripciones']);
         this._inscripcionesService
           .eliminarInscripcion(result)
           .subscribe((resp: any) => {
@@ -107,9 +108,10 @@ export class DashboardInscripcionesComponent implements OnInit {
             }, 300);
             return;
           });
-        this.myTable.renderRows();
-      } else {
-        this.ruta.navigate(['inscripciones']);
+        this.myTable.renderRows(); */
+        this._inscripcionesService.eliminarInscripcion(result).subscribe(() => {
+          this.store.dispatch(cargarInscripciones());
+        });
       }
     });
   }
@@ -127,7 +129,6 @@ export class DashboardInscripcionesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: any) => {
       this.ruta.navigate(['inscripciones']);
-      console.log('El Dialog se ha cerrado');
     });
   }
 }

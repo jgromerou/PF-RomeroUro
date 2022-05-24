@@ -103,7 +103,8 @@ export class DashboardAlumnosComponent implements OnInit {
 
   openDialogVer(alumno: Alumno) {
     const dialogRef = this.dialog.open(VerAlumnoComponent, {
-      width: '300px',
+      width: '600px',
+      height: '600px',
       panelClass: 'makeItMiddle',
       data: {
         idAlumno: alumno.idAlumno,

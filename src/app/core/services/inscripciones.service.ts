@@ -25,7 +25,7 @@ export class InscripcionesService {
 
   obtenerDatosInscripcionesFiltradoAlumno(inscripcion: any): Observable<any> {
     return this.http.get<any>(
-      `${environment.URL_SERVICIOS}/Inscripciones?idAlumno=${inscripcion}`
+      `${environment.URL_SERVICIOS}/Inscripciones?idAlumno=${inscripcion.idAlumno}`
     );
   }
 

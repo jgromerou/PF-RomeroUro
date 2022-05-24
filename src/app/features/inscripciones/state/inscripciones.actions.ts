@@ -19,3 +19,13 @@ export const inscripcionesCargadasCurso = createAction(
   '[Lista Inscripciones cargadas por curso] Inscripciones cargadas por curso',
   props<{ inscripciones: Inscripcion[] }>()
 );
+
+export const cargarInscripcionesAlumno = createAction(
+  '[Lista Inscripciones por Alumno] Cargar Inscripciones por alumno',
+  props<{ idAlumno: number }>()
+);
+
+export const inscripcionesCargadasAlumno = createAction(
+  '[Lista Inscripciones cargadas por alumno] Inscripciones cargadas por alumno',
+  props<{ inscripciones: Inscripcion[] }>()
+);

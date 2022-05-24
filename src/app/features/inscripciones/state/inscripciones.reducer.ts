@@ -33,5 +33,16 @@ export const inscripcionesReducer = createReducer(
     (state, { inscripciones }) => {
       return { ...state, cargando: false, inscripciones };
     }
+  ),
+
+  on(InscripcionesActions.cargarInscripcionesAlumno, (state) => {
+    return { ...state, cargando: true };
+  }),
+
+  on(
+    InscripcionesActions.inscripcionesCargadasAlumno,
+    (state, { inscripciones }) => {
+      return { ...state, cargando: false, inscripciones };
+    }
   )
 );

@@ -20,3 +20,8 @@ export const selectorListaInscripcionesCurso = createSelector(
   selectorInscripciones,
   (state: InscripcionState) => state.inscripciones
 );
+
+export const selectorListaInscripcionesAlumno = createSelector(
+  selectorInscripciones,
+  (state: InscripcionState) => state.inscripciones
+);
