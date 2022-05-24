@@ -16,6 +16,10 @@ export class CursosService {
     return this.http.get<any>(`${environment.URL_SERVICIOS}/Cursos`);
   }
 
+  obtenerCurso(idCurso: any): Observable<any> {
+    return this.http.get(`${environment.URL_SERVICIOS}/Cursos/${idCurso}`);
+  }
+
   agregarCursos(curso: Curso): Observable<any> {
     return this.http
       .post<Curso>(`${environment.URL_SERVICIOS}/Cursos`, curso)

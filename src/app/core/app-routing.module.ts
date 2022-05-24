@@ -32,7 +32,7 @@ const routes: Routes = [
   {
     path: 'inscripciones',
     loadChildren: () =>
-      import('./../features/inscripciones/inscripciones.module').then(
+      import('../features/inscripciones/inscripciones.module').then(
         (m) => m.InscripcionesModule
       ),
     canActivate: [LoginGuard],

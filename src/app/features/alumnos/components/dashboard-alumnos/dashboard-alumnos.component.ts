@@ -9,6 +9,9 @@ import { EliminarAlumnoComponent } from '../dialog/eliminar-alumno/eliminar-alum
 import { VerAlumnoComponent } from '../dialog/ver-alumno/ver-alumno.component';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Store } from '@ngrx/store';
+import { alumnosCargados, cargarAlumnos } from '../../state/alumnos.actions';
+import { selectorListaAlumnos } from '../../state/alumnos.selectors';
 
 @Component({
   selector: 'app-dashboard-alumnos',
@@ -21,7 +24,7 @@ export class DashboardAlumnosComponent implements OnInit {
   rol!: boolean;
 
   alumnSubscription!: Subscription;
-  datos$!: Observable<any>;
+  datos$!: Observable<Alumno[]>;
 
   displayedColumns: string[] = [
     'idAlumno',
@@ -38,14 +41,16 @@ export class DashboardAlumnosComponent implements OnInit {
     private _alumnosService: AlumnosService,
     public authService: AuthService,
     private ruta: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
-    this.datos$ = this._alumnosService.obtenerDatos();
+    this.store.dispatch(cargarAlumnos());
+    this.datos$ = this.store.select(selectorListaAlumnos);
     this.alumnSubscription = this._alumnosService.alumnoSubject.subscribe(
-      () => {
-        this.datos$ = this._alumnosService.obtenerDatos();
+      (data) => {
+        this.store.dispatch(alumnosCargados({ alumnos: data }));
       }
     );
   }
@@ -56,7 +61,6 @@ export class DashboardAlumnosComponent implements OnInit {
     }
   }
 
-  //Dialog Editar
   openDialogEditar(alumno: Alumno) {
     const dialogRef = this.dialog.open(EditarAlumnoComponent, {
       width: '300px',
@@ -73,14 +77,8 @@ export class DashboardAlumnosComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      console.log('El Dialog se ha cerrado');
-      this.ruta.navigate(['alumnos']);
-      this._alumnosService.editarAlumno(result).subscribe((resp: any) => {
-        this.ruta.navigate(['alumnos']);
-        setTimeout(() => {
-          this.myTable.renderRows();
-        }, 300);
-        return;
+      this._alumnosService.editarAlumno(result).subscribe(() => {
+        this.store.dispatch(cargarAlumnos());
       });
     });
   }
@@ -94,16 +92,12 @@ export class DashboardAlumnosComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('El Dialog se ha cerrado');
-      this.ruta.navigate(['alumnos']);
-      this._alumnosService.eliminarAlumno(result).subscribe((resp: any) => {
+      if (result !== undefined) {
         this.ruta.navigate(['alumnos']);
-        setTimeout(() => {
-          this.myTable.renderRows();
-        }, 300);
-        return;
-      });
-      this.myTable.renderRows();
+        this._alumnosService.eliminarAlumno(result).subscribe(() => {
+          this.store.dispatch(cargarAlumnos());
+        });
+      }
     });
   }
 
@@ -124,7 +118,6 @@ export class DashboardAlumnosComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: any) => {
       this.ruta.navigate(['alumnos']);
-      console.log('El Dialog se ha cerrado');
     });
   }
 }

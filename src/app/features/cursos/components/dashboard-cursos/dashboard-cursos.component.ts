@@ -18,9 +18,6 @@ import { selectorListaCursos } from '../../state/curso.selectors';
   styleUrls: ['./dashboard-cursos.component.css'],
 })
 export class DashboardCursosComponent implements OnInit {
-  /*  @ViewChild(MatTable) myTable!: MatTable<any>;
-  dataSaved = false; */
-
   cursSubscription!: Subscription;
   datos$!: Observable<Curso[]>;
 

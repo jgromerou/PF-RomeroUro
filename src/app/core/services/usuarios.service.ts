@@ -10,7 +10,7 @@ import { Usuario } from '../models/usuario';
 export class UsuariosService {
   logueado!: any;
 
-  usuarioSubject = new Subject<Usuario>();
+  usuarioSubject = new Subject<any>();
   URL_SERVICIOS = environment.URL_SERVICIOS;
 
   constructor(private http: HttpClient) {}

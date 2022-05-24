@@ -6,11 +6,3 @@ export class Curso {
     public horas: string
   ) {}
 }
-
-/* export interface Curso {
-  idCurso: string;
-  curso: string;
-  descripcion: string;
-  horas: string;
-}
- */

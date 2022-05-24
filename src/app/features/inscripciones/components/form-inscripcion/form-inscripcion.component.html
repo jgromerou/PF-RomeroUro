@@ -8,7 +8,7 @@
   <form [formGroup]="formularioInscripcion" (ngSubmit)="GuardarInscripcion()">
     <div fxLayout="row" fxFlexFill fxLayout.lt-md="column" fxLayoutGap="8px">
       <mat-form-field fxFlex>
-        <mat-label>Id Alumno</mat-label>
+        <mat-label>Nombre Alumno</mat-label>
         <mat-select formControlName="idAlumno">
           <mat-option
             *ngFor="let alumno of datosAlumnos$ | async"

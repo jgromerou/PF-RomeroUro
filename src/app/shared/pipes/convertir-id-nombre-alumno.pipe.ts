@@ -3,9 +3,9 @@ import { map, Observable } from 'rxjs';
 import { AlumnosService } from 'src/app/core/services/alumnos.service';
 
 @Pipe({
-  name: 'convertirIdaNombre',
+  name: 'convertirIdNombreAlumno',
 })
-export class ConvertirIdaNombrePipe implements PipeTransform {
+export class ConvertirIdNombreAlumnoPipe implements PipeTransform {
   constructor(private _alumnoService: AlumnosService) {}
 
   transform(idAlumno: number): Observable<any> {

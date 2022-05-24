@@ -16,18 +16,6 @@ export class CursoEffects {
       )
     )
   );
-
-  /* cargarCursosconAlumnosEffect = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cargarCursoconAlumnos),
-      exhaustMap(() =>
-        this.cursosService
-          .obtenerDatosCursoconAlumnos(10)
-          .pipe(map((alumnos) => cursoconAlumnosCargados({ alumnos })))
-      )
-    )
-  ); */
-
   constructor(
     private actions$: Actions,
     private cursosService: CursosService

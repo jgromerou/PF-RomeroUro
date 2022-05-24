@@ -8,7 +8,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ConvertirestadoPipe } from './pipes/convertirestado.pipe';
 import { UnirnombreapellidoPipe } from './pipes/unirnombreapellido.pipe';
 import { RouterModule } from '@angular/router';
-import { ConvertirIdaNombrePipe } from './pipes/convertir-ida-nombre.pipe';
+import { ConvertirIdNombreAlumnoPipe } from './pipes/convertir-id-nombre-alumno.pipe';
+import { ConvertirIdNombreCursoPipe } from './pipes/convertir-id-nombre-curso.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ConvertirIdaNombrePipe } from './pipes/convertir-ida-nombre.pipe';
     DashboardComponent,
     ConvertirestadoPipe,
     UnirnombreapellidoPipe,
-    ConvertirIdaNombrePipe,
+    ConvertirIdNombreAlumnoPipe,
+    ConvertirIdNombreCursoPipe,
   ],
   imports: [CommonModule, RouterModule, AppMaterialModule],
   exports: [
@@ -27,7 +29,8 @@ import { ConvertirIdaNombrePipe } from './pipes/convertir-ida-nombre.pipe';
     DashboardComponent,
     ConvertirestadoPipe,
     UnirnombreapellidoPipe,
-    ConvertirIdaNombrePipe,
+    ConvertirIdNombreAlumnoPipe,
+    ConvertirIdNombreCursoPipe,
   ],
 })
 export class SharedModule {}

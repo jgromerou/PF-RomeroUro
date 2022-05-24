@@ -8,6 +8,10 @@ import { VerUsuarioComponent } from '../dialog/ver-usuario/ver-usuario.component
 import { EliminarUsuarioComponent } from '../dialog/eliminar-usuario/eliminar-usuario.component';
 import { EditarUsuarioComponent } from '../dialog/editar-usuario/editar-usuario.component';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { cargarUsuarios, usuariosCargados } from '../../state/usuarios.actions';
+import { selectorListaUsuarios } from '../../state/usuarios.selectors';
+import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-usuarios',
@@ -32,14 +36,17 @@ export class DashboardUsuariosComponent implements OnInit {
   constructor(
     private _usuariosService: UsuariosService,
     public authService: AuthService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private store: Store,
+    private ruta: Router
   ) {}
 
   ngOnInit(): void {
-    this.datos$ = this._usuariosService.obtenerDatos();
+    this.store.dispatch(cargarUsuarios());
+    this.datos$ = this.store.select(selectorListaUsuarios);
     this.usuarioSubscription = this._usuariosService.usuarioSubject.subscribe(
-      () => {
-        this.datos$ = this._usuariosService.obtenerDatos();
+      (data) => {
+        this.store.dispatch(usuariosCargados({ usuarios: data }));
       }
     );
   }
@@ -63,11 +70,14 @@ export class DashboardUsuariosComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: any) => {
       console.log('El Dialog se ha cerrado');
       if (result !== undefined) {
-        this._usuariosService.editarUsuario(result).subscribe((resp: any) => {
+        /* this._usuariosService.editarUsuario(result).subscribe((resp: any) => {
           setTimeout(() => {
             this.myTable.renderRows();
           }, 300);
           return;
+        }); */
+        this._usuariosService.editarUsuario(result).subscribe(() => {
+          this.store.dispatch(cargarUsuarios());
         });
       }
     });
@@ -84,13 +94,17 @@ export class DashboardUsuariosComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('El Dialog se ha cerrado');
       if (result !== undefined) {
-        this._usuariosService.eliminarUsuario(result).subscribe((resp: any) => {
+        /* this._usuariosService.eliminarUsuario(result).subscribe((resp: any) => {
           setTimeout(() => {
             this.myTable.renderRows();
           }, 300);
           return;
         });
-        this.myTable.renderRows();
+        this.myTable.renderRows(); */
+        this.ruta.navigate(['usuarios']);
+        this._usuariosService.eliminarUsuario(result).subscribe(() => {
+          this.store.dispatch(cargarUsuarios());
+        });
       }
     });
   }
@@ -109,6 +123,7 @@ export class DashboardUsuariosComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: any) => {
       console.log('El Dialog se ha cerrado');
+      this.ruta.navigate(['usuarios']);
     });
   }
 }

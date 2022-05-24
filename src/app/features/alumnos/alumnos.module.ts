@@ -13,7 +13,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { VerAlumnoComponent } from './components/dialog/ver-alumno/ver-alumno.component';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-//import { AlumnosEffects } from '../alumnos.effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { alumnoFeatureKey, alumnoReducer } from './state/alumnos.reducer';
+import { AlumnosEffects } from './state/alumnos.effects';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,13 @@ import { EffectsModule } from '@ngrx/effects';
     SharedModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    //EffectsModule.forFeature([AlumnosEffects]),
+    StoreModule.forFeature(alumnoFeatureKey, alumnoReducer),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+      name: 'Prueba NgRx',
+    }),
+    EffectsModule.forFeature([AlumnosEffects]),
   ],
   exports: [AlumnosRoutingModule],
 })

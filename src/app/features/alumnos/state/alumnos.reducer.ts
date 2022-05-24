@@ -1,14 +1,25 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import * as AlumnosActions from './alumnos.actions';
+import { createReducer, on } from '@ngrx/store';
+import { Alumno } from 'src/app/core/models/alumno';
+import * as AlumnoActions from './alumnos.actions';
 
-export const alumnosFeatureKey = 'alumnos';
+export const alumnoFeatureKey = 'alumno';
 
-export interface State {}
+export interface AlumnoState {
+  cargando: boolean;
+  alumnos: Alumno[];
+}
 
-export const initialState: State = {};
+export const initialState: AlumnoState = {
+  cargando: false,
+  alumnos: [],
+};
 
 export const alumnoReducer = createReducer(
   initialState,
-
-  on(AlumnosActions.cargarAlumnoss, (state) => state)
+  on(AlumnoActions.cargarAlumnos, (state) => {
+    return { ...state, cargando: true };
+  }),
+  on(AlumnoActions.alumnosCargados, (state, { alumnos }) => {
+    return { ...state, cargando: false, alumnos };
+  })
 );

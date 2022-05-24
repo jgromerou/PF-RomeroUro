@@ -10,9 +10,21 @@ import { EditarUsuarioComponent } from './components/dialog/editar-usuario/edita
 import { VerUsuarioComponent } from './components/dialog/ver-usuario/ver-usuario.component';
 import { EliminarUsuarioComponent } from './components/dialog/eliminar-usuario/eliminar-usuario.component';
 import { FormUsuarioComponent } from './components/form-usuario/form-usuario.component';
+import { EffectsModule } from '@ngrx/effects';
+import { UsuariosEffects } from './state/usuarios.effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { usuarioReducer, usuariosFeatureKey } from './state/usuarios.reducer';
 
 @NgModule({
-  declarations: [DashboardUsuariosComponent, EditarUsuarioComponent, VerUsuarioComponent, EliminarUsuarioComponent, FormUsuarioComponent],
+  declarations: [
+    DashboardUsuariosComponent,
+    EditarUsuarioComponent,
+    VerUsuarioComponent,
+    EliminarUsuarioComponent,
+    FormUsuarioComponent,
+  ],
   imports: [
     CommonModule,
     UsuariosRoutingModule,
@@ -20,6 +32,13 @@ import { FormUsuarioComponent } from './components/form-usuario/form-usuario.com
     SharedModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    StoreModule.forFeature(usuariosFeatureKey, usuarioReducer),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+      name: 'Prueba NgRx',
+    }),
+    EffectsModule.forFeature([UsuariosEffects]),
   ],
 })
 export class UsuariosModule {}

@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class AlumnosService {
-  alumnoSubject = new Subject<Alumno>();
+  alumnoSubject = new Subject<any>();
   URL_SERVICIOS = environment.URL_SERVICIOS;
 
   constructor(private http: HttpClient) {}

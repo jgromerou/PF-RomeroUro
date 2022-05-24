@@ -1,4 +1,4 @@
-import { Component, Injectable, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -6,9 +6,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTable } from '@angular/material/table';
+import { Store } from '@ngrx/store';
 import { UsuariosService } from 'src/app/core/services/usuarios.service';
-import { DashboardUsuariosComponent } from '../dashboard-usuarios/dashboard-usuarios.component';
+import { cargarUsuarios } from '../../state/usuarios.actions';
 
 @Component({
   selector: 'app-form-usuario',
@@ -16,17 +16,15 @@ import { DashboardUsuariosComponent } from '../dashboard-usuarios/dashboard-usua
   styleUrls: ['./form-usuario.component.css'],
 })
 export class FormUsuarioComponent {
-  @ViewChild(DashboardUsuariosComponent) myTable!: MatTable<any>;
   dataSaved = false;
   massage = null;
-
   formularioUsuario!: FormGroup;
 
   constructor(
-    private _mytable: DashboardUsuariosComponent,
     private _usuariosService: UsuariosService,
     public fb: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private store: Store
   ) {
     this.formularioUsuario = fb.group({
       usuario: new FormControl('', [Validators.required]),
@@ -46,14 +44,11 @@ export class FormUsuarioComponent {
     const formalum = this.formularioUsuario.value;
 
     this._usuariosService.agregarUsuarios(formalum).subscribe((resp: any) => {
+      this.store.dispatch(cargarUsuarios());
       setTimeout(() => {
         this.dataSaved = false;
-        this._mytable.myTable.renderRows();
         this.reiniciarFormulario();
-      }, 1300);
-
-      return;
+      }, 300);
     });
-    return;
   }
 }
