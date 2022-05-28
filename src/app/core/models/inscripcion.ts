@@ -1,6 +1,6 @@
 export class Inscripcion {
   constructor(
-    public idInscripcion: string,
+    public idInscripcion: number,
     public idAlumno: string,
     public idCurso: string
   ) {}

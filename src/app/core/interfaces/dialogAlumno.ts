@@ -1,5 +1,5 @@
 export interface DialogAlumno {
-  idAlumno: number;
+  idAlumno: string;
   nombres: string;
   apellidos: string;
   email: string;

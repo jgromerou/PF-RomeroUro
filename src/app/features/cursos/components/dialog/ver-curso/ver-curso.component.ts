@@ -47,7 +47,6 @@ export class VerCursoComponent implements OnInit {
     public dialogRef: MatDialogRef<VerCursoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogCurso,
     public fb: FormBuilder,
-    private _cursoService: CursosService,
     private _inscripcionesService: InscripcionesService,
     public authService: AuthService,
     private ruta: Router,

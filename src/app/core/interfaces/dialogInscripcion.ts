@@ -1,5 +1,5 @@
 export interface DialogInscripcion {
-  idInscripcion: number;
-  idAlumno: number;
-  idCurso: number;
+  idInscripcion: string;
+  idAlumno: string;
+  idCurso: string;
 }

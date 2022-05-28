@@ -12,7 +12,7 @@ export const inscripcionesCargadas = createAction(
 
 export const cargarInscripcionesCurso = createAction(
   '[Lista Inscripciones por Curso] Cargar Inscripciones por curso',
-  props<{ idCurso: number }>()
+  props<{ idCurso: string }>()
 );
 
 export const inscripcionesCargadasCurso = createAction(
@@ -22,7 +22,7 @@ export const inscripcionesCargadasCurso = createAction(
 
 export const cargarInscripcionesAlumno = createAction(
   '[Lista Inscripciones por Alumno] Cargar Inscripciones por alumno',
-  props<{ idAlumno: number }>()
+  props<{ idAlumno: string }>()
 );
 
 export const inscripcionesCargadasAlumno = createAction(

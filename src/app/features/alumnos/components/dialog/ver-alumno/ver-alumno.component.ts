@@ -10,12 +10,10 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { DialogAlumno } from 'src/app/core/interfaces/dialogAlumno';
 import { Inscripcion } from 'src/app/core/models/inscripcion';
-import { AlumnosService } from 'src/app/core/services/alumnos.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { InscripcionesService } from 'src/app/core/services/inscripciones.service';
 import { cargarInscripcionesAlumno } from 'src/app/features/inscripciones/state/inscripciones.actions';
@@ -39,10 +37,8 @@ export class VerAlumnoComponent implements OnInit {
     public dialogRef: MatDialogRef<VerAlumnoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogAlumno,
     public fb: FormBuilder,
-    private alumnosService: AlumnosService,
     private _inscripcionesService: InscripcionesService,
     public authService: AuthService,
-    private ruta: Router,
     public dialog: MatDialog,
     private store: Store
   ) {}

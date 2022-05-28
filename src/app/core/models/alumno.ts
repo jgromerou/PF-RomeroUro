@@ -1,6 +1,6 @@
 export class Alumno {
   constructor(
-    public idAlumno: number,
+    public idAlumno: string,
     public nombres: string,
     public apellidos: string,
     public email: string,

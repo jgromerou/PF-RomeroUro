@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogInscripcion } from 'src/app/core/interfaces/dialogInscripcion';
-import { InscripcionesService } from 'src/app/core/services/inscripciones.service';
 
 @Component({
   selector: 'app-editar-inscripcion',
@@ -20,8 +19,7 @@ export class EditarInscripcionComponent {
   constructor(
     public dialogRef: MatDialogRef<EditarInscripcionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogInscripcion,
-    public fb: FormBuilder,
-    private inscripcionesService: InscripcionesService
+    public fb: FormBuilder
   ) {}
 
   formControl = new FormControl('', [Validators.required]);

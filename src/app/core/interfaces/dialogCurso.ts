@@ -1,5 +1,5 @@
 export interface DialogCurso {
-  idCurso: number;
+  idCurso: string;
   curso: string;
   descripcion: string;
   horas: number;
