@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Usuario } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root',
@@ -23,15 +22,9 @@ export class UsuariosService {
     return this.http
       .post(`${environment.URL_SERVICIOS}/Usuarios`, usuario)
       .pipe(
-        tap(
-          // Log the result or error
-          {
-            next: () => {
-              this.usuarioSubject.next(usuario);
-            },
-            error: (error) => console.log(error),
-          }
-        )
+        tap({
+          next: () => this.usuarioSubject.next(usuario),
+        })
       );
   }
 
@@ -42,16 +35,9 @@ export class UsuariosService {
         usuario
       )
       .pipe(
-        tap(
-          // Log the result or error
-          {
-            next: () => {
-              this.usuarioSubject.next(usuario);
-            },
-
-            error: (error) => console.log(error),
-          }
-        )
+        tap({
+          next: () => this.usuarioSubject.next(usuario),
+        })
       );
   }
 
@@ -62,16 +48,9 @@ export class UsuariosService {
         usuario
       )
       .pipe(
-        tap(
-          // Log the result or error
-          {
-            next: () => {
-              this.usuarioSubject.next(usuario);
-            },
-
-            error: (error) => console.log(error),
-          }
-        )
+        tap({
+          next: () => this.usuarioSubject.next(usuario),
+        })
       );
   }
 }

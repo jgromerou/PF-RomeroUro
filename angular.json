@@ -7,7 +7,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "3PF-RomeroUro": {
+    "PF-RomeroUro": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -26,14 +26,8 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/app/tema.scss",
-              "src/styles.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/app/tema.scss", "src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -73,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "3PF-RomeroUro:build:production"
+              "browserTarget": "PF-RomeroUro:build:production"
             },
             "development": {
-              "browserTarget": "3PF-RomeroUro:build:development"
+              "browserTarget": "PF-RomeroUro:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "3PF-RomeroUro:build"
+            "browserTarget": "PF-RomeroUro:build"
           }
         },
         "test": {
@@ -94,19 +88,13 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/app/tema.scss",
-              "src/styles.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/app/tema.scss", "src/styles.css"],
             "scripts": []
           }
         }
       }
     }
   },
-  "defaultProject": "3PF-RomeroUro"
+  "defaultProject": "PF-RomeroUro"
 }

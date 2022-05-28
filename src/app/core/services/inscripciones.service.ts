@@ -45,15 +45,9 @@ export class InscripcionesService {
     return this.http
       .post(`${environment.URL_SERVICIOS}/Inscripciones`, inscripcion)
       .pipe(
-        tap(
-          // Log the result or error
-          {
-            next: () => {
-              this.inscripcionSubject.next(inscripcion);
-            },
-            error: (error) => console.log(error),
-          }
-        )
+        tap({
+          next: () => this.inscripcionSubject.next(inscripcion),
+        })
       );
   }
 
@@ -64,16 +58,9 @@ export class InscripcionesService {
         inscripcion
       )
       .pipe(
-        tap(
-          // Log the result or error
-          {
-            next: () => {
-              this.inscripcionSubject.next(inscripcion);
-            },
-
-            error: (error) => console.log(error),
-          }
-        )
+        tap({
+          next: () => this.inscripcionSubject.next(inscripcion),
+        })
       );
   }
 
@@ -83,16 +70,9 @@ export class InscripcionesService {
         `${environment.URL_SERVICIOS}/Inscripciones/${inscripcion.idInscripcion}`
       )
       .pipe(
-        tap(
-          // Log the result or error
-          {
-            next: () => {
-              this.inscripcionSubject.next(inscripcion);
-            },
-
-            error: (error) => console.log(error),
-          }
-        )
+        tap({
+          next: () => this.inscripcionSubject.next(inscripcion),
+        })
       );
   }
 }

@@ -69,18 +69,8 @@ export class DashboardInscripcionesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      console.log('El Dialog se ha cerrado');
-
       if (result !== undefined) {
         this.ruta.navigate(['inscripciones']);
-        /* this._inscripcionesService
-          .editarInscripcion(result)
-          .subscribe((resp: any) => {
-            setTimeout(() => {
-              this.myTable.renderRows();
-            }, 300);
-            return;
-          }); */
         this._inscripcionesService.editarInscripcion(result).subscribe(() => {
           this.store.dispatch(cargarInscripciones());
         });
@@ -97,18 +87,7 @@ export class DashboardInscripcionesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('El Dialog se ha cerrado');
       if (result !== undefined) {
-        /*  this.ruta.navigate(['inscripciones']);
-        this._inscripcionesService
-          .eliminarInscripcion(result)
-          .subscribe((resp: any) => {
-            setTimeout(() => {
-              this.myTable.renderRows();
-            }, 300);
-            return;
-          });
-        this.myTable.renderRows(); */
         this._inscripcionesService.eliminarInscripcion(result).subscribe(() => {
           this.store.dispatch(cargarInscripciones());
         });

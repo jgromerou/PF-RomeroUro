@@ -36,7 +36,6 @@ describe('AuthService', () => {
       ];
 
       authService.IniciarSesion('Stroman', '1234').subscribe((data) => {
-        console.log('data login', data);
         expect(data[0].idUsuario).toEqual(mockUsuario[0].idUsuario);
       });
 

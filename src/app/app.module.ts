@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-
-//Core
 import { CoreModule } from './core/core.module';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './core/app-routing.module';
 import { AlumnosModule } from './features/alumnos/alumnos.module';

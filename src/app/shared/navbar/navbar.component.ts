@@ -42,18 +42,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     var values = JSON.parse(localStorage.getItem('session') || 'false');
-
     this.store.select(selectorUsuarioActivo).subscribe((data) => {
-      console.log();
-
-      //JSON.parse(localStorage.getItem('session') || 'false').usuario
       if (values.usuario !== undefined) {
-        console.log('localstorage', values.usuario);
         this.usuarioActivo = values.usuario;
-        console.log('user active', this.usuarioActivo);
       } else {
         this.usuarioActivo = data.usuarioActivo;
-        console.log('act', this.usuarioActivo.usuario);
       }
     });
   }

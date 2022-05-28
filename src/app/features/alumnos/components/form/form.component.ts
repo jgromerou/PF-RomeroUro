@@ -7,7 +7,9 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { Store } from '@ngrx/store';
 import { AlumnosService } from 'src/app/core/services/alumnos.service';
+import { cargarAlumnos } from '../../state/alumnos.actions';
 import { DashboardAlumnosComponent } from '../dashboard-alumnos/dashboard-alumnos.component';
 
 @Component({
@@ -26,7 +28,8 @@ export class FormComponent {
     private _mytable: DashboardAlumnosComponent,
     private _alumnosService: AlumnosService,
     public fb: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private store: Store
   ) {
     this.formularioAlumno = fb.group({
       nombres: new FormControl('', [Validators.required]),
@@ -52,9 +55,9 @@ export class FormComponent {
     const formalum = this.formularioAlumno.value;
 
     this._alumnosService.agregarAlumnos(formalum).subscribe((resp: any) => {
+      this.store.dispatch(cargarAlumnos());
       setTimeout(() => {
         this.dataSaved = false;
-        this._mytable.myTable.renderRows();
         this.reiniciarFormulario();
       }, 300);
 

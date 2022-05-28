@@ -45,13 +45,12 @@ export class LoginComponent {
       .subscribe((data: Usuario) => {
         if (data) {
           this.store.dispatch(cargarSesion({ data }));
-          console.log('Usuario logueado exitosamente', data);
+
           this.authService.establecerSesion(true, data);
         } else {
           Swal.fire({
             icon: 'error',
             title: 'Error de credenciales',
-            text: 'Error de credenciales',
             confirmButtonColor: '#0D47A1',
           });
         }

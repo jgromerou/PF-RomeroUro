@@ -11,7 +11,7 @@ import { selectorUsuarioActivo } from './features/auth/state/auth.selectors';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = '3PF-RomeroUro';
+  title = 'PF-RomeroUro';
   other_content: boolean = false;
   usuarioActivo!: Usuario;
 
@@ -20,8 +20,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.store.select(selectorUsuarioActivo).subscribe((data) => {
       this.usuarioActivo = data.usuarioActivo;
-      console.log('act23232', this.usuarioActivo.idUsuario);
-      console.log('eeee', this.authService.isAuthenticated);
     });
   }
 }

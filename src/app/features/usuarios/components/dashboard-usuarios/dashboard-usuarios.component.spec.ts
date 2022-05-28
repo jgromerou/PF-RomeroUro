@@ -30,14 +30,13 @@ describe('DashboardUsuariosComponent', () => {
     const controlador = fixture.componentInstance;
 
     fixture.detectChanges();
-    // expect(controlador.usuarios).toBeTruthy();
+
     controlador.datos$.subscribe((data) => {
-      console.log('usuarios', data.length);
       expect(data.length).toBeGreaterThan(7);
     });
 
     expect(component).toBeTruthy();
-  }); // validar que los usuarios se carguen correctamente en el controlador
+  });
 
   it('El titulo de usuarios se renderiza correctamente en la vista', () => {
     const fixture = TestBed.createComponent(DashboardUsuariosComponent);
@@ -48,7 +47,7 @@ describe('DashboardUsuariosComponent', () => {
     expect(vista.querySelector('.container')?.textContent).toContain(
       'Tabla de Usuarios'
     );
-  }); // validar que muestre el titulo de la tabla de usuarios
+  });
 
   it('Los usuarios se renderizaron correctamente en la vista', () => {
     const fixture = TestBed.createComponent(DashboardUsuariosComponent);
@@ -59,5 +58,5 @@ describe('DashboardUsuariosComponent', () => {
     expect(vista.querySelector('.container')?.textContent).toContain(
       'Tabla de Usuarios'
     );
-  }); // validar que muestre el titulo de la tabla de usuarios
+  });
 });

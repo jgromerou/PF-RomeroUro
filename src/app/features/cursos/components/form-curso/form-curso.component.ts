@@ -20,14 +20,12 @@ import { DashboardCursosComponent } from '../dashboard-cursos/dashboard-cursos.c
   styleUrls: ['./form-curso.component.css'],
 })
 export class FormCursoComponent {
-  //@ViewChild(DashboardCursosComponent) myTable!: MatTable<any>;
   dataSaved = false;
   massage = null;
 
   formularioCurso!: FormGroup;
 
   constructor(
-    //private _mytable: DashboardCursosComponent,
     private _cursosService: CursosService,
     public fb: FormBuilder,
     public dialog: MatDialog,

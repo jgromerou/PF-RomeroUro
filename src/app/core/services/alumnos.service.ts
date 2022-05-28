@@ -23,15 +23,9 @@ export class AlumnosService {
 
   agregarAlumnos(alumno: any) {
     return this.http.post(`${environment.URL_SERVICIOS}/Alumnos`, alumno).pipe(
-      tap(
-        // Log the result or error
-        {
-          next: () => {
-            this.alumnoSubject.next(alumno);
-          },
-          error: (error) => console.log(error),
-        }
-      )
+      tap({
+        next: () => this.alumnoSubject.next(alumno),
+      })
     );
   }
 
@@ -39,14 +33,9 @@ export class AlumnosService {
     return this.http
       .put(`${environment.URL_SERVICIOS}/Alumnos/${alumno.idAlumno}`, alumno)
       .pipe(
-        tap(
-          // Log the result or error
-          {
-            next: () => this.alumnoSubject.next(alumno),
-
-            error: (error) => console.log(error),
-          }
-        )
+        tap({
+          next: () => this.alumnoSubject.next(alumno),
+        })
       );
   }
 
@@ -54,16 +43,9 @@ export class AlumnosService {
     return this.http
       .delete(`${environment.URL_SERVICIOS}/Alumnos/${alumno.idAlumno}`, alumno)
       .pipe(
-        tap(
-          // Log the result or error
-          {
-            next: () => {
-              this.alumnoSubject.next(alumno);
-            },
-
-            error: (error) => console.log(error),
-          }
-        )
+        tap({
+          next: () => this.alumnoSubject.next(alumno),
+        })
       );
   }
 }

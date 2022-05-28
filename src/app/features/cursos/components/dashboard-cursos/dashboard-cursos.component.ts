@@ -64,8 +64,6 @@ export class DashboardCursosComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('El Dialog se ha cerrado');
-
       this._cursoService.editarCurso(result).subscribe(() => {
         this.store.dispatch(cargarCursos());
       });
@@ -81,7 +79,6 @@ export class DashboardCursosComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('El Dialog se ha cerrado');
       if (result !== undefined) {
         this.ruta.navigate(['cursos']);
         this._cursoService.eliminarCurso(result).subscribe(() => {
@@ -105,7 +102,6 @@ export class DashboardCursosComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      console.log('El Dialog se ha cerrado');
       this.ruta.navigate(['cursos']);
     });
   }

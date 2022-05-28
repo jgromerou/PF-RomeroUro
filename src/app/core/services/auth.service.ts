@@ -40,8 +40,6 @@ export class AuthService {
       this.rol = false;
     }
   }
-
-  //Inicio de sesión del usuario.
   IniciarSesion(usuario: string, contrasena: string): Observable<Usuario> {
     return this.http
       .get<Usuario[]>(`${environment.URL_SERVICIOS}/Usuarios`)
@@ -65,8 +63,6 @@ export class AuthService {
         })
       );
   }
-
-  //Hace el logout del usuario.
   CerrarSesion(): void {
     this.sesion = {
       activa: false,

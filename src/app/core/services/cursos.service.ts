@@ -24,16 +24,9 @@ export class CursosService {
     return this.http
       .post<Curso>(`${environment.URL_SERVICIOS}/Cursos`, curso)
       .pipe(
-        tap(
-          // Log the result or error
-          {
-            next: (curso) => {
-              this.cursoSubject.next(curso);
-              console.log('curso: ', curso);
-            },
-            error: (error) => console.log(error),
-          }
-        )
+        tap({
+          next: (curso) => this.cursoSubject.next(curso),
+        })
       );
   }
 
@@ -41,16 +34,9 @@ export class CursosService {
     return this.http
       .put<Curso>(`${environment.URL_SERVICIOS}/Cursos/${curso.idCurso}`, curso)
       .pipe(
-        tap(
-          // Log the result or error
-          {
-            next: () => {
-              this.cursoSubject.next(curso);
-            },
-
-            error: (error) => console.log(error),
-          }
-        )
+        tap({
+          next: () => this.cursoSubject.next(curso),
+        })
       );
   }
 
@@ -58,16 +44,9 @@ export class CursosService {
     return this.http
       .delete<Curso>(`${environment.URL_SERVICIOS}/Cursos/${curso.idCurso}`)
       .pipe(
-        tap(
-          // Log the result or error
-          {
-            next: () => {
-              this.cursoSubject.next(curso);
-            },
-
-            error: (error) => console.log(error),
-          }
-        )
+        tap({
+          next: () => this.cursoSubject.next(curso),
+        })
       );
   }
 }

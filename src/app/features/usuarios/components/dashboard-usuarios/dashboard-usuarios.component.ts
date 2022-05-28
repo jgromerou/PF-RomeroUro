@@ -68,14 +68,7 @@ export class DashboardUsuariosComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      console.log('El Dialog se ha cerrado');
       if (result !== undefined) {
-        /* this._usuariosService.editarUsuario(result).subscribe((resp: any) => {
-          setTimeout(() => {
-            this.myTable.renderRows();
-          }, 300);
-          return;
-        }); */
         this._usuariosService.editarUsuario(result).subscribe(() => {
           this.store.dispatch(cargarUsuarios());
         });
@@ -92,15 +85,7 @@ export class DashboardUsuariosComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('El Dialog se ha cerrado');
       if (result !== undefined) {
-        /* this._usuariosService.eliminarUsuario(result).subscribe((resp: any) => {
-          setTimeout(() => {
-            this.myTable.renderRows();
-          }, 300);
-          return;
-        });
-        this.myTable.renderRows(); */
         this.ruta.navigate(['usuarios']);
         this._usuariosService.eliminarUsuario(result).subscribe(() => {
           this.store.dispatch(cargarUsuarios());
@@ -122,7 +107,6 @@ export class DashboardUsuariosComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      console.log('El Dialog se ha cerrado');
       this.ruta.navigate(['usuarios']);
     });
   }
