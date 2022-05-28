@@ -37,7 +37,7 @@ export class DashboardUsuariosComponent implements OnInit {
     private _usuariosService: UsuariosService,
     public authService: AuthService,
     public dialog: MatDialog,
-    private store: Store,
+    public store: Store,
     private ruta: Router
   ) {}
 

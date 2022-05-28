@@ -7,7 +7,13 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EffectsModule } from '@ngrx/effects';
+import { Store, StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppMaterialModule } from 'src/app/core/app.material';
+import { environment } from 'src/environments/environment';
+import { AlumnosEffects } from '../../state/alumnos.effects';
+import { alumnoFeatureKey, alumnoReducer } from '../../state/alumnos.reducer';
 import { DashboardAlumnosComponent } from '../dashboard-alumnos/dashboard-alumnos.component';
 import { FormComponent } from './form.component';
 
@@ -29,6 +35,15 @@ describe('FormAlumnosComponent', () => {
         AppMaterialModule,
         FormsModule,
         ReactiveFormsModule,
+        StoreModule.forRoot({}),
+        StoreModule.forFeature(alumnoFeatureKey, alumnoReducer),
+        StoreDevtoolsModule.instrument({
+          maxAge: 25,
+          logOnly: environment.production,
+          name: 'Prueba NgRx',
+        }),
+        EffectsModule.forRoot([]),
+        EffectsModule.forFeature([AlumnosEffects]),
       ],
       providers: [
         { provide: MatDialogRef, useValue: dialogMock },

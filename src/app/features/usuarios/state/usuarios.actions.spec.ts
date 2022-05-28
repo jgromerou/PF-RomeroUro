@@ -1,7 +1,9 @@
 import * as fromUsuarios from './usuarios.actions';
 
-describe('cargarUsuarioss', () => {
+describe('cargarUsuarios', () => {
   it('should return an action', () => {
-    expect(fromUsuarios.cargarUsuarioss().type).toBe('[Usuarios] Cargar Usuarioss');
+    expect(fromUsuarios.cargarUsuarios().type).toBe(
+      '[Lista Usuarios] Cargar Usuarios'
+    );
   });
 });

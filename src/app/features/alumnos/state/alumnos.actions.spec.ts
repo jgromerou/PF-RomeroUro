@@ -1,7 +1,9 @@
 import * as fromAlumnos from './alumnos.actions';
 
-describe('cargarAlumnoss', () => {
+describe('cargarAlumnos', () => {
   it('should return an action', () => {
-    expect(fromAlumnos.cargarAlumnoss().type).toBe('[Alumnos] Cargar Alumnoss');
+    expect(fromAlumnos.cargarAlumnos().type).toBe(
+      '[Lista Alumnos] Cargar Alumnos'
+    );
   });
 });

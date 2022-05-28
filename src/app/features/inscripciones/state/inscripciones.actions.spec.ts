@@ -1,7 +1,9 @@
 import * as fromInscripciones from './inscripciones.actions';
 
-describe('cargarInscripcioness', () => {
+describe('cargarInscripciones', () => {
   it('should return an action', () => {
-    expect(fromInscripciones.cargarInscripcioness().type).toBe('[Inscripciones] Cargar Inscripcioness');
+    expect(fromInscripciones.cargarInscripciones().type).toBe(
+      '[Lista Inscripciones] Cargar Inscripciones'
+    );
   });
 });

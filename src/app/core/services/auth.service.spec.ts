@@ -31,12 +31,12 @@ describe('AuthService', () => {
           usuario: 'Stroman',
           contrasena: '1234',
           rol: 21,
-          idUsuario: 213,
+          idUsuario: '213',
         },
       ];
 
       authService.IniciarSesion('Stroman', '1234').subscribe((data) => {
-        expect(data[0].idUsuario).toEqual(mockUsuario[0].idUsuario);
+        expect(data.idUsuario).toEqual(mockUsuario[0].idUsuario);
       });
 
       const req = httpMock.expectOne({
@@ -58,12 +58,12 @@ describe('AuthService', () => {
           usuario: 'Stroman',
           contrasena: '1234',
           rol: 21,
-          idUsuario: 213,
+          idUsuario: '213',
         },
       ];
 
       authService.IniciarSesion('Stroman5', '12345').subscribe((data) => {
-        expect(data[0]).toEqual(variable);
+        expect(data).toEqual(variable);
       });
 
       const req = httpMock.expectOne({

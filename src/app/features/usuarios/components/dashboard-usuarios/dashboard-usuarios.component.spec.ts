@@ -1,7 +1,16 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppMaterialModule } from 'src/app/core/app.material';
+import { environment } from 'src/environments/environment';
+import { UsuariosEffects } from '../../state/usuarios.effects';
+import {
+  usuariosFeatureKey,
+  usuarioReducer,
+} from '../../state/usuarios.reducer';
 import { DashboardUsuariosComponent } from './dashboard-usuarios.component';
 
 describe('DashboardUsuariosComponent', () => {
@@ -10,7 +19,20 @@ describe('DashboardUsuariosComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule, AppMaterialModule, RouterTestingModule],
+      imports: [
+        HttpClientModule,
+        AppMaterialModule,
+        RouterTestingModule,
+        StoreModule.forRoot({}),
+        StoreModule.forFeature(usuariosFeatureKey, usuarioReducer),
+        StoreDevtoolsModule.instrument({
+          maxAge: 25,
+          logOnly: environment.production,
+          name: 'Prueba NgRx',
+        }),
+        EffectsModule.forRoot([]),
+        EffectsModule.forFeature([UsuariosEffects]),
+      ],
       declarations: [DashboardUsuariosComponent],
     }).compileComponents();
   });
@@ -22,19 +44,6 @@ describe('DashboardUsuariosComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('Los usuarios se asignaron correctamente en el controlador', () => {
-    const fixture = TestBed.createComponent(DashboardUsuariosComponent);
-    const controlador = fixture.componentInstance;
-
-    fixture.detectChanges();
-
-    controlador.datos$.subscribe((data) => {
-      expect(data.length).toBeGreaterThan(7);
-    });
-
     expect(component).toBeTruthy();
   });
 

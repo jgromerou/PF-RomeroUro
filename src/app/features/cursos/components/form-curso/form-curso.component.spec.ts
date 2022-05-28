@@ -7,7 +7,13 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppMaterialModule } from 'src/app/core/app.material';
+import { environment } from 'src/environments/environment';
+import { CursoEffects } from '../../state/curso.effects';
+import { cursoFeatureKey, cursoReducer } from '../../state/curso.reducer';
 import { DashboardCursosComponent } from '../dashboard-cursos/dashboard-cursos.component';
 import { FormCursoComponent } from './form-curso.component';
 
@@ -29,6 +35,15 @@ describe('FormCursoComponent', () => {
         AppMaterialModule,
         FormsModule,
         ReactiveFormsModule,
+        StoreModule.forRoot({}),
+        StoreModule.forFeature(cursoFeatureKey, cursoReducer),
+        StoreDevtoolsModule.instrument({
+          maxAge: 25,
+          logOnly: environment.production,
+          name: 'Prueba NgRx',
+        }),
+        EffectsModule.forRoot([]),
+        EffectsModule.forFeature([CursoEffects]),
       ],
       providers: [
         { provide: MatDialogRef, useValue: dialogMock },
